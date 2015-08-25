@@ -1,7 +1,7 @@
 {
   "name": "calendar",
-  "version": "0.0.6",
-  "description": "Generic calendar component for Turn",
+  "version": "0.0.7",
+  "description": "Generic calendar component for Turn - google analytics calendar lookalike",
   "main": "dist/calendar.js",
   "authors": [
     "Tri Pham <tri.pham@turn.com>"
