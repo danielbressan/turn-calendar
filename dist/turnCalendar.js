@@ -1424,11 +1424,11 @@ angular.module('calendarTemplates', ['turnCalendar.html']);
 
 angular.module("turnCalendar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("turnCalendar.html",
-    "<button ng-click=\"enableCalendar()\" class=\"turn-calendar-enable-btn\" ng-disabled=\"disabled()\">{{getDateString(currentSelectedStartDate.date, timeZone)}} <span\n" +
-    "        ng-show=\"currentSelectedStartDate.date && isNotSingleDateMode\">- {{getDateString(currentSelectedEndDate.date, timeZone)}} </span>\n" +
-    "</button>\n" +
+    "<!--<button ng-click=\"enableCalendar()\" class=\"turn-calendar-enable-btn\" ng-disabled=\"disabled()\">{{getDateString(currentSelectedStartDate.date, timeZone)}} <span-->\n" +
+    "        <!--ng-show=\"currentSelectedStartDate.date && isNotSingleDateMode\">- {{getDateString(currentSelectedEndDate.date, timeZone)}} </span>-->\n" +
+    "<!--</button>-->\n" +
     "<div>\n" +
-    "    <div class=\"turn-calendar-div\" ng-show=\"calendarEnabled\">\n" +
+    "    <div class=\"turn-calendar-div\" ng-show=\"true\">\n" +
     "        <div class=\"turn-calendar-input-container\">\n" +
     "            <div class=\"turn-calendar-input\">\n" +
     "                <span ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\" class=\"turn-calendar-from\">From</span>\n" +
@@ -1447,9 +1447,9 @@ angular.module("turnCalendar.html", []).run(["$templateCache", function($templat
     "                                  }\" turn-calendar-prior>{{range.value}}</button>\n" +
     "                <span ng-show=\"priorButtons.length && isNotSingleDateMode\" class=\"turn-calendar-day-label\">Days</span>\n" +
     "            </div>\n" +
-    "            <div class=\"turn-calendar-submit\">\n" +
-    "                <button ng-click=\"applyCalendar()\" class=\"turn-calendar-done-btn\" >Done</button>\n" +
-    "            </div>\n" +
+    "            <!--<div class=\"turn-calendar-submit\">-->\n" +
+    "                <!--<button ng-click=\"applyCalendar()\" class=\"turn-calendar-done-btn\" >Done</button>-->\n" +
+    "            <!--</div>-->\n" +
     "            <p class=\"clear\"></p>\n" +
     "        </div>\n" +
     "        <div class=\"turn-calendar-table-container\">\n" +

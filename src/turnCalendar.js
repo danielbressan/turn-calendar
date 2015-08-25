@@ -150,9 +150,9 @@
 angular
     .module('turn/calendar', ['calendarTemplates'])
 
-    /**
-     * Default values for some of the config option of the calendar
-     */
+/**
+ * Default values for some of the config option of the calendar
+ */
     .constant('turnCalendarDefaults', {
 
         /**
@@ -160,7 +160,7 @@ angular
          *
          * @type {array}
          */
-        monthName : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        monthName: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 
         /**
          * Default day name to display on calendar
@@ -173,23 +173,23 @@ angular
         startDayOfWeek: 0
     })
 
-    /**
-     * Constraint on maximum months allowed to display, either as forwar or backward
-     *
-     * @type {number}
-     */
+/**
+ * Constraint on maximum months allowed to display, either as forwar or backward
+ *
+ * @type {number}
+ */
     .constant('MAX_MONTHS_ALLOWED', 6)
 
-    /**
-     * Constraint on minimum months allowed to display as extra forward or backward
-     *
-     * @type {number}
-     */
+/**
+ * Constraint on minimum months allowed to display as extra forward or backward
+ *
+ * @type {number}
+ */
     .constant('MIN_MONTHS_ALLOWED', 1)
 
-    /**
-     * A service for calendar component, contains mostly util functions
-     */
+/**
+ * A service for calendar component, contains mostly util functions
+ */
     .service('turnCalendarService', function (MAX_MONTHS_ALLOWED, MIN_MONTHS_ALLOWED) {
 
         return {
@@ -230,7 +230,7 @@ angular
                     return new Date(year, month, 1);
                 }
 
-                return new timezoneJS.Date(year, month, 1, timezone).setHours(0,0,0,0);
+                return new timezoneJS.Date(year, month, 1, timezone).setHours(0, 0, 0, 0);
 
             },
 
@@ -264,7 +264,7 @@ angular
 
                 var dateObj = new Date(date);
 
-                if ( Object.prototype.toString.call(dateObj) !== "[object Date]" )
+                if (Object.prototype.toString.call(dateObj) !== "[object Date]")
                     return false;
                 return !isNaN(dateObj.getTime());
             },
@@ -326,7 +326,7 @@ angular
     .controller('CalendarController', function ($scope, $attrs, turnCalendarDefaults, turnCalendarService, $document) {
 
         var self = this, calendarOptions, MONTH_NAME,
-            // These two variables are used to track start date and end date click
+        // These two variables are used to track start date and end date click
             selectedStartDate = null, selectedEndDate = null,
             /**
              * allowMonthGeneration will allow generation of month in some edge cases:
@@ -339,7 +339,7 @@ angular
              */
             allowMonthGeneration = false,
 
-            // Internal variable to track the last selected cursor click
+        // Internal variable to track the last selected cursor click
             lastSelectedDate = null;
 
         $scope.currentSelectedStartDate = null;
@@ -388,14 +388,14 @@ angular
             'forwardMonths', 'startDayOfWeek', 'minSelectDate', 'maxSelectDate',
             'weeklySelectRange', 'monthlySelectRange', 'priorRangePresets',
             'maxForwardMonth', 'minBackwardMonth', 'startDate', 'endDate',
-            'selectionMode', 'disabled', 'timezone'], function(key) {
+            'selectionMode', 'disabled', 'timezone'], function (key) {
             self[key] = pickValue(key);
         });
 
         var currentDate = self.timezone ? new timezoneJS.Date(new timezoneJS.Date(new Date(), self.timezone).setHours(0, 0, 0, 0), self.timezone)
             : new Date(new Date().setHours(0, 0, 0, 0));
 
-        angular.forEach(['minSelectDate', 'maxSelectDate'], function(key) {
+        angular.forEach(['minSelectDate', 'maxSelectDate'], function (key) {
             $scope.$watch(key, function (newVal) {
 
                 if (!turnCalendarService.validateDateInput(newVal)) {
@@ -422,7 +422,7 @@ angular
             });
         });
 
-        angular.forEach(['minBackwardMonth', 'maxForwardMonth'], function(key) {
+        angular.forEach(['minBackwardMonth', 'maxForwardMonth'], function (key) {
             $scope.$watch(key, function (newVal) {
                 if (!turnCalendarService.convertToDateObject(newVal, self.timezone)) {
                     return;
@@ -431,7 +431,7 @@ angular
             });
         });
 
-        angular.forEach(['forwardMonths', 'backwardMonths'], function(key) {
+        angular.forEach(['forwardMonths', 'backwardMonths'], function (key) {
             $scope.$watch(key, function (newVal) {
                 if (!turnCalendarService.isMonthValid(newVal)) {
                     return;
@@ -511,7 +511,7 @@ angular
             return self.maxForwardMonth &&
                 turnCalendarService.convertToDateObject(self.maxForwardMonth, self.timezone) &&
                 turnCalendarService.getYearMonthDate(year, month, 1, self.timezone) >
-                    turnCalendarService.convertToDateObject(self.maxForwardMonth, self.timezone);
+                turnCalendarService.convertToDateObject(self.maxForwardMonth, self.timezone);
         };
 
         /**
@@ -557,9 +557,9 @@ angular
 
         var isBelowMinMonth = function (month, year) {
             return self.minBackwardMonth &&
-                   turnCalendarService.convertToDateObject(self.minBackwardMonth, self.timezone) &&
-                   turnCalendarService.getYearMonthDate(year, month, 1, self.timezone) <
-                       turnCalendarService.convertToDateObject(self.minBackwardMonth, self.timezone);
+                turnCalendarService.convertToDateObject(self.minBackwardMonth, self.timezone) &&
+                turnCalendarService.getYearMonthDate(year, month, 1, self.timezone) <
+                turnCalendarService.convertToDateObject(self.minBackwardMonth, self.timezone);
         };
 
         /**
@@ -694,7 +694,7 @@ angular
          */
         var isUnavailable = function (date) {
             return (self.minSelectDate && date < turnCalendarService.getDate(self.minSelectDate, self.timezone)) ||
-                   (self.maxSelectDate && date > turnCalendarService.getDate(self.maxSelectDate, self.timezone));
+                (self.maxSelectDate && date > turnCalendarService.getDate(self.maxSelectDate, self.timezone));
         };
 
 
@@ -1020,8 +1020,7 @@ angular
          */
         var isDaily = function () {
             return (!self.weeklySelectRange && !self.monthlySelectRange) ||
-                   (!isDateExceedSelectedRange(self.weeklySelectRange, self.monthlySelectRange, selectedStartDate, selectedEndDate) &&
-                    !isDateExceedSelectedRange(self.weeklySelectRange, self.monthlySelectRange, selectedStartDate, selectedEndDate));
+                (!isDateExceedSelectedRange(self.weeklySelectRange, self.monthlySelectRange, selectedStartDate, selectedEndDate) && !isDateExceedSelectedRange(self.weeklySelectRange, self.monthlySelectRange, selectedStartDate, selectedEndDate));
         };
 
         /**
@@ -1128,9 +1127,9 @@ angular
         /**
          * Snaps selected start/end date in case of monthly and weekly selection mode
          */
-        var snapDateToMonthlyWeekly = function(){
+        var snapDateToMonthlyWeekly = function () {
             var updatedStartDate, updatedEndDate, isValueUpdated = false,
-                dayDiff = Math.round((selectedEndDate.date.getTime() - selectedStartDate.date.getTime())/ 864e5);
+                dayDiff = Math.round((selectedEndDate.date.getTime() - selectedStartDate.date.getTime()) / 864e5);
 
             if (self.monthlySelectRange && dayDiff > self.monthlySelectRange) {
                 updatedStartDate = turnCalendarService.getYearMonthDate(selectedStartDate.date.getFullYear(), selectedStartDate.date.getMonth(), 1, self.timezone);
@@ -1138,7 +1137,7 @@ angular
                 isValueUpdated = true;
             } else if (self.weeklySelectRange && dayDiff > self.weeklySelectRange) {
                 updatedStartDate = turnCalendarService.getDate(selectedStartDate.date.setDate(selectedStartDate.date.getDate() - (7 + selectedStartDate.date.getDay() - self.startDayOfWeek) % 7), self.timezone);
-                updatedEndDate = turnCalendarService.getDate(((selectedEndDate.date.setDate(selectedEndDate.date.getDate() - (7 + selectedEndDate.date.getDay() - self.startDayOfWeek) % 7)) + 6*864e5), self.timezone);
+                updatedEndDate = turnCalendarService.getDate(((selectedEndDate.date.setDate(selectedEndDate.date.getDate() - (7 + selectedEndDate.date.getDay() - self.startDayOfWeek) % 7)) + 6 * 864e5), self.timezone);
                 isValueUpdated = true;
             }
 
@@ -1269,7 +1268,6 @@ angular
             }
 
         };
-
 
 
         $scope.monthArray = generateMonthArray(null, null);
@@ -1788,8 +1786,8 @@ angular
          * (behave same as cancel button click)
          */
         $document.bind('click', function (event) {
-            if(!angular.element('turn-calendar').find(event.target).length){
-                $scope.$apply(function(){
+            if (!angular.element('turn-calendar').find(event.target).length) {
+                $scope.$apply(function () {
                     if ($scope.currentSelectedStartDate && $scope.currentSelectedEndDate) {
                         $scope.cancel();
                     }
