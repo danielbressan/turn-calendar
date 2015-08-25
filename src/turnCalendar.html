@@ -1,8 +1,8 @@
-<button ng-click="enableCalendar()" class="turn-calendar-enable-btn" ng-disabled="disabled()">{{getDateString(currentSelectedStartDate.date, timeZone)}} <span
-        ng-show="currentSelectedStartDate.date && isNotSingleDateMode">- {{getDateString(currentSelectedEndDate.date, timeZone)}} </span>
-</button>
+<!--<button ng-click="enableCalendar()" class="turn-calendar-enable-btn" ng-disabled="disabled()">{{getDateString(currentSelectedStartDate.date, timeZone)}} <span-->
+        <!--ng-show="currentSelectedStartDate.date && isNotSingleDateMode">- {{getDateString(currentSelectedEndDate.date, timeZone)}} </span>-->
+<!--</button>-->
 <div>
-    <div class="turn-calendar-div" ng-show="calendarEnabled">
+    <div class="turn-calendar-div" ng-show="true">
         <div class="turn-calendar-input-container">
             <div class="turn-calendar-input">
                 <span ng-show="isNotSingleDateMode && !isDayClickDisabledMode" class="turn-calendar-from">From</span>
@@ -21,9 +21,9 @@
                                   }" turn-calendar-prior>{{range.value}}</button>
                 <span ng-show="priorButtons.length && isNotSingleDateMode" class="turn-calendar-day-label">Days</span>
             </div>
-            <div class="turn-calendar-submit">
-                <button ng-click="applyCalendar()" class="turn-calendar-done-btn" >Done</button>
-            </div>
+            <!--<div class="turn-calendar-submit">-->
+                <!--<button ng-click="applyCalendar()" class="turn-calendar-done-btn" >Done</button>-->
+            <!--</div>-->
             <p class="clear"></p>
         </div>
         <div class="turn-calendar-table-container">

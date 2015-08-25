@@ -66,11 +66,11 @@
     timezoneJS.timezone.init({ async: false });
 
 </script>
-<div>
-    <button ng-click="setNewEndDate()" class="turn-calendar-enable-btn">Increase start date</button>
-
-</div>
-
+<!--<div>-->
+    <!--<button ng-click="setNewEndDate()" class="turn-calendar-enable-btn">Increase start date</button>-->
+<!--</div>-->
+<br>
+=== Calendar 1 ===
 <turn-calendar start-day-of-week="4" backward-months="2" forward-months="2"
                min-select-date="'9/13/2013'"
                weekly-select-range="90"
@@ -81,11 +81,18 @@
                end-date="endDate">
 
 </turn-calendar>
-
+<br>
+=== Calendar 2 ===
 <turn-calendar calendar-options="calendarOptions"></turn-calendar>
+<br>
+=== Calendar 3 ===
 <turn-calendar start-date="'9/1/2014'" end-date="'10/15/2014'" apply-callback="callback(1, 2)"></turn-calendar>
-<turn-calendar starting-month="11" starting-year="2014" backward-months="1" forward-months="1" weekly-select-range="30" start-date="'11/15/2014'" end-date="'01/08/2015'"> </turn-calendar>
 
+<br>
+=== Calendar 4 ===
+<turn-calendar starting-month="11" starting-year="2014" backward-months="1" forward-months="1" weekly-select-range="30" start-date="'11/15/2014'" end-date="'01/08/2015'"> </turn-calendar>
+<br>
+=== Calendar 5 ==
 <turn-calendar start-day-of-week="4" backward-months="2" forward-months="2"
                min-select-date="'9/13/2013'"
                weekly-select-range="90"
@@ -96,6 +103,8 @@
 
 </turn-calendar>
 
+<br>
+=== Calendar 6 ===
 <turn-calendar start-day-of-week="4"
                min-select-date="'9/13/2013'"
                min-backward-month="'08/2013'"
@@ -104,13 +113,17 @@
 
 </turn-calendar>
 
+<br>
+=== Calendar 7 ===
 singleDate with min-backward-month:
-<turn-calendar min-select-date="'9/13/2013'"
-               min-backward-month="'08/2013'"
+<turn-calendar min-select-date="'9/13/2015'"
+               min-backward-month="'08/2015'"
                selection-mode="singleDate">
 
 </turn-calendar>
 
+<br>
+=== Calendar 8 ===
 singleDate with 2 backward and forward months:
 <turn-calendar min-select-date="'9/13/2013'"
                backward-months="2" forward-months="2"
@@ -119,6 +132,8 @@ singleDate with 2 backward and forward months:
 
 </turn-calendar>
 
+<br>
+=== Calendar 9 ===
 selection-mode="disableDayClick":
 <turn-calendar backward-months="1"
                prior-range-presets="[{value: 7, isDefault: true}, {value: 30}]"
@@ -126,6 +141,8 @@ selection-mode="disableDayClick":
 
 </turn-calendar>
 
+<br>
+=== Calendar 10 ===
 disabled="true":
 <turn-calendar backward-months="1"
                selection-mode="singleDate"
@@ -133,6 +150,7 @@ disabled="true":
 
 </turn-calendar>
 
+=== Calendar 11
 timezone support:
 <turn-calendar start-day-of-week="4" backward-months="2" forward-months="2"
                min-select-date="'1/13/2015'"
@@ -144,7 +162,20 @@ timezone support:
                end-date="endDate" timezone="Asia/Ho_Chi_Minh">
 </turn-calendar>
 
+<br>
+=== Calendar 12 ===
 <turn-calendar end-date="1437616946000" start-date="1436486400000" timezone="Asia/Ho_Chi_Minh"></turn-calendar>
+
+
+<br>
+=== Calendar - GOOGLE Analytics ===
+<turn-calendar start-day-of-week="4"
+               backward-months="1"
+               forward-months="1"
+               start-date="startDate"
+               end-date="startDate">
+</turn-calendar>
+
 
 </body>
 </html>
