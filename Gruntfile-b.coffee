@@ -33,6 +33,10 @@ module.exports = (grunt) ->
       files:
         'test/unit.js': 'test/unit.coffee'
 
+    copy:
+      dist:
+        files: [  ]
+
     concat:
       main:
         src: ['./dist/turnCalendar.js', './dist/template.js']

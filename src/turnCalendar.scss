@@ -49,6 +49,12 @@ $selected-color: #0aa4d2;
   font-size: 13px;
   margin: 5px 0 0 0;
 
+  &.popup {
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #999;
+    color: #58585b;
+  }
+
   .turn-calendar-navigation {
     border-style: solid;
     cursor: pointer;
@@ -138,6 +144,7 @@ $selected-color: #0aa4d2;
       color: #2ba7d2;
       font-size: 14px;
       padding-bottom: 11px;
+      cursor: pointer;
     }
 
     .turn-calendar-mouse-over {
@@ -292,4 +299,47 @@ p.clear {
 
 .no-left-margin {
   margin-left: 0 !important;
+}
+
+.turn-calendar-popupbtn {
+
+  border: 1px solid #efefef;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  font-size: 140%;
+
+  &:hover {
+    border: 1px solid #a3a3a3;
+  }
+
+  & > span {
+    padding: 3px;
+  }
+}
+
+.turn-calendar-arrow {
+
+  display: inline-block;
+
+  &.up {
+    background: #f7f7f7 url(img/date_control_up.gif) no-repeat 50% 50%;
+    padding-left: 18px;
+    border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+  }
+
+  &.down {
+    background: #f7f7f7 url(img/date_control_down.gif) no-repeat 50% 50%;
+    padding-left: 18px;
+    border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 0;
+  }
+
 }

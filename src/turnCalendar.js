@@ -1524,6 +1524,17 @@ angular
         };
 
         /**
+         * Function that selects the entier month
+         *
+         */
+        $scope.selectMonth = function(index) {
+            console.log('index ', index);
+            console.log("month ", $scope.monthArray[index]);
+
+        };
+
+
+        /**
          * Util function, if the end date falls into a date that is unavailable,
          * it will decrease the date till meet a date that's available
          *
@@ -1826,8 +1837,21 @@ angular
 
         });
 
+        // Get the tpl based on isPopup option
+        $scope.getTemplateUrl = function() {
+            return $scope.isPopup === true ? "turnCalendarModal.html" : "turnCalendar.html";
+        };
+
     })
-    .directive('turnCalendar', function () {
+    .directive('turnCalendar', ['$compile', function ($compile) {
+
+        var linker = function(scope, element, attrs) {
+            var template = scope.isPopup === true ? "turnCalendarModal.html" : "turnCalendar.html";
+            var tpl = $compile(template)(scope);
+
+            element.html(tpl).show();
+            $compile(element.contents())(scope);
+        }
 
         return {
             restrict: 'E',
@@ -1849,10 +1873,13 @@ angular
                 applyCallback: '&',
                 selectionMode: '=',
                 disabled: '&',
-                timezone: '='
+                timezone: '=',
+                isPopup: '='
             },
             controller: 'CalendarController',
-            templateUrl: 'turnCalendar.html'
+            //link: linker,
+            //templateUrl: 'turnCalendarModal.html'.
+            template: '<ng-include src="getTemplateUrl()"/>',
         };
 
-    });
+    }]);

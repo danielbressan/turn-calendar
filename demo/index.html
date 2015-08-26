@@ -31,8 +31,7 @@
                 };
 
                 $scope.endDate = new Date().getTime();
-
-                $scope.startDate = ($scope.endDate - (10*864e5));
+                $scope.startDate = ($scope.endDate - (10 * 864e5));
 
                 $scope.setNewEndDate = function () {
                     var currentVal = new Date($scope.endDate);
@@ -48,11 +47,11 @@
                     weeklySelectRange: 60,
                     monthlySelectRange: 90,
                     minBackwardMonth: '08/2013',
-                    priorRangePresets: [{value: 7}, {value: 30, isDefault: true}, {value : 45}],
+                    priorRangePresets: [{value: 7}, {value: 30, isDefault: true}, {value: 45}],
                     maxForwardMonth: $scope.maxMonthAllowed()
                 };
 
-                $scope.callback = function (arg1 , arg2) {
+                $scope.callback = function (arg1, arg2) {
                     console.log(arg1);
                     console.log(arg2);
                 }
@@ -63,11 +62,11 @@
     // Note, the tz folder has to be present on the web server, consult timezoneJS
     // installation procedure
     timezoneJS.timezone.zoneFileBasePath = './tz';
-    timezoneJS.timezone.init({ async: false });
+    timezoneJS.timezone.init({async: false});
 
 </script>
 <!--<div>-->
-    <!--<button ng-click="setNewEndDate()" class="turn-calendar-enable-btn">Increase start date</button>-->
+<!--<button ng-click="setNewEndDate()" class="turn-calendar-enable-btn">Increase start date</button>-->
 <!--</div>-->
 <br>
 === Calendar 1 ===
@@ -90,7 +89,8 @@
 
 <br>
 === Calendar 4 ===
-<turn-calendar starting-month="11" starting-year="2014" backward-months="1" forward-months="1" weekly-select-range="30" start-date="'11/15/2014'" end-date="'01/08/2015'"> </turn-calendar>
+<turn-calendar starting-month="11" starting-year="2014" backward-months="1" forward-months="1" weekly-select-range="30"
+               start-date="'11/15/2014'" end-date="'01/08/2015'"></turn-calendar>
 <br>
 === Calendar 5 ==
 <turn-calendar start-day-of-week="4" backward-months="2" forward-months="2"
@@ -173,9 +173,11 @@ timezone support:
                backward-months="1"
                forward-months="1"
                start-date="startDate"
-               end-date="startDate">
+               end-date="endDate"
+               is-popup="true">
 </turn-calendar>
 
+<p style="margin-top: 15px">End page!</p>
 
 </body>
 </html>
