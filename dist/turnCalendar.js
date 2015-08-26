@@ -862,6 +862,10 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
       colorSelectedDateRange();
       colorizePriorButtons();
       $scope.isBothDateSelected = true;
+      // apply calendar when is not in popup mode
+      if (!$scope.isPopup) {
+        $scope.applyCalendar();
+      }
     };
     /**
          * Snaps selected start/end date in case of monthly and weekly selection mode

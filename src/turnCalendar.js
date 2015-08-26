@@ -1122,6 +1122,11 @@ angular
             colorizePriorButtons();
             $scope.isBothDateSelected = true;
 
+            // apply calendar when is not in popup mode
+            if(!$scope.isPopup) {
+                $scope.applyCalendar();
+            }
+
         };
 
         /**
@@ -1266,7 +1271,6 @@ angular
             } else if (isBothSelected()) {
                 resetDayClick(day);
             }
-
         };
 
 
