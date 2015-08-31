@@ -234,14 +234,14 @@ p.clear {
 .turn-calendar-arrow {
   display: inline-block; }
   .turn-calendar-arrow.up {
-    background: #f7f7f7 url(img/date_control_up.gif) no-repeat 50% 50%;
+    background: #f7f7f7 url(img/date_control_down.gif) no-repeat 50% 50%;
     padding-left: 18px;
     border-radius: 0 5px 5px 0;
     -moz-border-radius: 0 5px 5px 0;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px; }
   .turn-calendar-arrow.down {
-    background: #f7f7f7 url(img/date_control_down.gif) no-repeat 50% 50%;
+    background: #f7f7f7 url(img/date_control_up.gif) no-repeat 50% 50%;
     padding-left: 18px;
     border-radius: 0 5px 0 0;
     -moz-border-radius: 0 5px 0 0;

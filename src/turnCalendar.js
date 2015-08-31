@@ -313,10 +313,15 @@ angular
              * @returns {string} Date string (will be in MM/dd/yyyy format if timezone
              * is specified, otherwise will be in locale datestring format)
              */
-            getDateString: function (dateObject, timezone) {
+            getDateString: function (dateObject, timezone, format) {
 
                 if (!dateObject) {
                     return null;
+                }
+
+                if(format) {
+                    var tjs = new timezoneJS.Date(dateObject)
+                    return tjs.toString(format);
                 }
 
                 return timezone ? dateObject.toString('MM/dd/yyyy', timezone) : dateObject.toLocaleDateString();
