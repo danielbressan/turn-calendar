@@ -1,7 +1,7 @@
 <!--<button ng-click="enableCalendar()" class="turn-calendar-enable-btn" ng-disabled="disabled()">{{getDateString(currentSelectedStartDate.date, timeZone)}} <span-->
 <!--ng-show="currentSelectedStartDate.date && isNotSingleDateMode">- {{getDateString(currentSelectedEndDate.date, timeZone)}} </span>-->
 <!--</button>-->
-<div>
+<div class="turn-calendar-main-container" style="position: relative;">
     <div class="turn-calendar-popupbtn" ng-click="enableCalendar()">
         <span>{{getDateString(currentSelectedStartDate.date, timeZone, 'MMM dd, yyyy')}}</span>
         <span>-</span>
@@ -10,7 +10,7 @@
         <div class="turn-calendar-arrow" ng-class="{'up': !calendarEnabled, 'down': calendarEnabled }">&nbsp;</div>
     </div>
 
-    <div class="turn-calendar-popup" style="position: absolute;">
+    <div class="turn-calendar-popup" style="position: absolute; z-index: 1000;">
         <div class="turn-calendar-div popup" ng-show="calendarEnabled">
             <div class="turn-calendar-input-container">
                 <div class="turn-calendar-input">

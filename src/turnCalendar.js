@@ -1318,7 +1318,8 @@ angular
                 if (isNaN($scope.$parent.$eval($attrs.startDate))) {
                     $scope.startDate = turnCalendarService.getDateString(selectedStartDate.date, self.timezone);
                 } else {
-                    $scope.startDate = selectedStartDate.date.getTime();
+                    //$scope.startDate = selectedStartDate.date.getTime();
+                    $scope.startDate = selectedStartDate.date;
                 }
 
             }
@@ -1327,7 +1328,8 @@ angular
                 if (isNaN($scope.$parent.$eval($attrs.endDate))) {
                     $scope.endDate = turnCalendarService.getDateString(selectedEndDate.date, self.timezone);
                 } else {
-                    $scope.endDate = selectedEndDate.date.getTime();
+                    //$scope.endDate = selectedEndDate.date.getTime();
+                    $scope.endDate = selectedEndDate.date;
                 }
 
             }

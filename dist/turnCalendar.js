@@ -1017,14 +1017,16 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
         if (isNaN($scope.$parent.$eval($attrs.startDate))) {
           $scope.startDate = turnCalendarService.getDateString(selectedStartDate.date, self.timezone);
         } else {
-          $scope.startDate = selectedStartDate.date.getTime();
+          //$scope.startDate = selectedStartDate.date.getTime();
+          $scope.startDate = selectedStartDate.date;
         }
       }
       if (angular.isDefined($attrs.endDate) && selectedEndDate) {
         if (isNaN($scope.$parent.$eval($attrs.endDate))) {
           $scope.endDate = turnCalendarService.getDateString(selectedEndDate.date, self.timezone);
         } else {
-          $scope.endDate = selectedEndDate.date.getTime();
+          //$scope.endDate = selectedEndDate.date.getTime();
+          $scope.endDate = selectedEndDate.date;
         }
       }
     };
@@ -1525,7 +1527,7 @@ angular.module("turnCalendarModal.html", []).run(["$templateCache", function($te
     "<!--<button ng-click=\"enableCalendar()\" class=\"turn-calendar-enable-btn\" ng-disabled=\"disabled()\">{{getDateString(currentSelectedStartDate.date, timeZone)}} <span-->\n" +
     "<!--ng-show=\"currentSelectedStartDate.date && isNotSingleDateMode\">- {{getDateString(currentSelectedEndDate.date, timeZone)}} </span>-->\n" +
     "<!--</button>-->\n" +
-    "<div>\n" +
+    "<div class=\"turn-calendar-main-container\" style=\"position: relative;\">\n" +
     "    <div class=\"turn-calendar-popupbtn\" ng-click=\"enableCalendar()\">\n" +
     "        <span>{{getDateString(currentSelectedStartDate.date, timeZone, 'MMM dd, yyyy')}}</span>\n" +
     "        <span>-</span>\n" +
@@ -1534,7 +1536,7 @@ angular.module("turnCalendarModal.html", []).run(["$templateCache", function($te
     "        <div class=\"turn-calendar-arrow\" ng-class=\"{'up': !calendarEnabled, 'down': calendarEnabled }\">&nbsp;</div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"turn-calendar-popup\" style=\"position: absolute;\">\n" +
+    "    <div class=\"turn-calendar-popup\" style=\"position: absolute; z-index: 1000;\">\n" +
     "        <div class=\"turn-calendar-div popup\" ng-show=\"calendarEnabled\">\n" +
     "            <div class=\"turn-calendar-input-container\">\n" +
     "                <div class=\"turn-calendar-input\">\n" +
