@@ -3,6 +3,5 @@ node_modules
 .sass-cache
 .DS_Store
 _SpecRunner.html
-Gruntfile.js
 .grunt
 .idea
