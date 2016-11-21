@@ -380,6 +380,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
          * @type {array}
          */
     $scope.monthNames = MONTH_NAME = turnCalendarDefaults.monthName;
+    $scope.monthYears = [];
     /**
          * An array which contains the name of day of week, to be displayed
          * by template
@@ -435,6 +436,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
         }
         monthArray.push(generateDayArray(year, newMonth));
         $scope.monthNames.push(MONTH_NAME[newMonth]);
+        $scope.monthYears.push(year);
       }
     };
     var isBelowMinMonth = function (month, year) {
@@ -471,6 +473,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
         }
         monthArray.unshift(generateDayArray(year, newMonth));
         $scope.monthNames.unshift(MONTH_NAME[newMonth]);
+        $scope.monthYears.unshift(year);
       }
     };
     /**
@@ -496,6 +499,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
       monthArray.push(baseMonth);
       // Reset the month names
       $scope.monthNames = [MONTH_NAME[month]];
+      $scope.monthYears = [year];
       setForwardMonths(monthArray, month, year);
       setBackwardMonths(monthArray, month, year);
       return monthArray;
@@ -1015,7 +1019,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
     var setStartEndDate = function () {
       if (angular.isDefined($attrs.startDate) && selectedStartDate) {
         if (isNaN($scope.$parent.$eval($attrs.startDate))) {
-          $scope.startDate = turnCalendarService.getDateString(selectedStartDate.date, self.timezone);
+          $scope.startDateString = turnCalendarService.getDateString(selectedStartDate.date, self.timezone);
         } else {
           //$scope.startDate = selectedStartDate.date.getTime();
           $scope.startDate = selectedStartDate.date;
@@ -1023,7 +1027,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
       }
       if (angular.isDefined($attrs.endDate) && selectedEndDate) {
         if (isNaN($scope.$parent.$eval($attrs.endDate))) {
-          $scope.endDate = turnCalendarService.getDateString(selectedEndDate.date, self.timezone);
+          $scope.endDateString = turnCalendarService.getDateString(selectedEndDate.date, self.timezone);
         } else {
           //$scope.endDate = selectedEndDate.date.getTime();
           $scope.endDate = selectedEndDate.date;
@@ -1124,9 +1128,11 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
       if (allowedArraySize === $scope.monthArray.length) {
         $scope.monthArray.shift();
         $scope.monthNames.shift();
+        $scope.monthYears.shift();
       }
       $scope.monthArray.push(newMonthArray);
       $scope.monthNames.push(MONTH_NAME[newMonth]);
+      $scope.monthYears.push(year);
       discolorSelectedDateRange();
       // Remember to color current selected start and end dates
       if (isBothSelected()) {
@@ -1165,9 +1171,11 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
       if (allowedArraySize === $scope.monthArray.length) {
         $scope.monthArray.pop();
         $scope.monthNames.pop();
+        $scope.monthYears.pop();
       }
       $scope.monthArray.unshift(newMonthArray);
       $scope.monthNames.unshift(MONTH_NAME[newMonth]);
+      $scope.monthYears.unshift(year);
       discolorSelectedDateRange();
       if (selectedStartDate && selectedEndDate) {
         colorSelectedDateRange();
@@ -1293,7 +1301,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
       if (!$scope.isNotSingleDateMode) {
         setSingleDate(day);
       }
-      $scope.endDate = turnCalendarService.getDateString(day.date, self.timezone);
+      $scope.endDateString = turnCalendarService.getDateString(day.date, self.timezone);
       if (selectedEndDate && selectedEndDate.date > day.date) {
         colorSelectedDateRange();
       }
@@ -1321,7 +1329,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
         return;
       }
       selectedEndDate = day;
-      $scope.endDate = turnCalendarService.getDateString(day.date, self.timezone);
+      $scope.endDateString = turnCalendarService.getDateString(day.date, self.timezone);
       discolorSelectedDateRange();
       colorSelectedDateRange();
     };
@@ -1461,9 +1469,9 @@ angular.module("turnCalendar.html", []).run(["$templateCache", function($templat
     "        <div class=\"turn-calendar-input-container\">\n" +
     "            <div class=\"turn-calendar-input\">\n" +
     "                <span ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\" class=\"turn-calendar-from\">From</span>\n" +
-    "                <input ng-show=\"!isDayClickDisabledMode\" class=\"turn-calendar-input-box\" type=\"text\" ng-model=\"startDateString\" ng-change=\"changeStartDate()\" />\n" +
+    "                <input ng-show=\"!isDayClickDisabledMode\" class=\"turn-calendar-input-box\" type=\"text\" ng-model=\"$parent.startDateString\" ng-change=\"changeStartDate()\" />\n" +
     "                <span ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\" class=\"turn-calendar-to\">To</span>\n" +
-    "                <input ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\" class=\"turn-calendar-input-box\" type=\"text\" ng-model=\"endDateString\" ng-change=\"changeEndDate()\" />\n" +
+    "                <input ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\" class=\"turn-calendar-input-box\" type=\"text\" ng-model=\"$parent.endDateString\" ng-change=\"changeEndDate()\" />\n" +
     "                <span ng-show=\"priorButtons.length && isNotSingleDateMode\" \n" +
     "                        class=\"turn-calendar-prior-label\"\n" +
     "                        ng-class=\"{'no-left-margin': isDayClickDisabledMode}\">\n" +
@@ -1489,7 +1497,7 @@ angular.module("turnCalendar.html", []).run(["$templateCache", function($templat
     "                <table class=\"turn-calendar-table\" ng-repeat=\"month in monthArray\">\n" +
     "                    <thead>\n" +
     "                        <tr>\n" +
-    "                            <th colspan=\"{{DAYS_IN_WEEK}}\" ng-click=\"selectMonth($index)\" class=\"turn-calendar-month\">{{monthNames[$index]}}</th>\n" +
+    "                            <th colspan=\"{{DAYS_IN_WEEK}}\" ng-click=\"selectMonth($index)\" class=\"turn-calendar-month\">{{monthNames[$index]}}, {{monthYears[$index]}}</th>\n" +
     "                        </tr>\n" +
     "                        <tr>\n" +
     "                            <th ng-repeat=\"dayName in dayNames\" class=\"turn-calendar-day\">{{dayName}}</th>\n" +
@@ -1536,17 +1544,17 @@ angular.module("turnCalendarModal.html", []).run(["$templateCache", function($te
     "        <div class=\"turn-calendar-arrow\" ng-class=\"{'up': !calendarEnabled, 'down': calendarEnabled }\">&nbsp;</div>\n" +
     "    </div>\n" +
     "\n" +
-    "    <div class=\"turn-calendar-popup\" style=\"position: absolute; z-index: 1000;\">\n" +
+    "    <div class=\"turn-calendar-popup\" style=\"position: absolute; z-index: 2000;\">\n" +
     "        <div class=\"turn-calendar-div popup\" ng-show=\"calendarEnabled\">\n" +
     "            <div class=\"turn-calendar-input-container\">\n" +
     "                <div class=\"turn-calendar-input\">\n" +
     "                    <span ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\"\n" +
     "                          class=\"turn-calendar-from\">From</span>\n" +
     "                    <input ng-show=\"!isDayClickDisabledMode\" class=\"turn-calendar-input-box\" type=\"text\"\n" +
-    "                           ng-model=\"startDateString\" ng-change=\"changeStartDate()\"/>\n" +
+    "                           ng-model=\"$parent.startDateString\" ng-change=\"changeStartDate()\"/>\n" +
     "                    <span ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\" class=\"turn-calendar-to\">To</span>\n" +
     "                    <input ng-show=\"isNotSingleDateMode && !isDayClickDisabledMode\" class=\"turn-calendar-input-box\"\n" +
-    "                           type=\"text\" ng-model=\"endDateString\" ng-change=\"changeEndDate()\"/>\n" +
+    "                           type=\"text\" ng-model=\"$parent.endDateString\" ng-change=\"changeEndDate()\"/>\n" +
     "                <span ng-show=\"priorButtons.length && isNotSingleDateMode\"\n" +
     "                      class=\"turn-calendar-prior-label\"\n" +
     "                      ng-class=\"{'no-left-margin': isDayClickDisabledMode}\">\n" +
@@ -1576,7 +1584,7 @@ angular.module("turnCalendarModal.html", []).run(["$templateCache", function($te
     "                        <thead>\n" +
     "                        <tr>\n" +
     "                            <th colspan=\"{{DAYS_IN_WEEK}}\" ng-click=\"selectMonth($index)\" class=\"turn-calendar-month\">\n" +
-    "                                {{monthNames[$index]}}\n" +
+    "                                {{monthNames[$index]}}, {{monthYears[$index]}}\n" +
     "                            </th>\n" +
     "                        </tr>\n" +
     "                        <tr>\n" +
