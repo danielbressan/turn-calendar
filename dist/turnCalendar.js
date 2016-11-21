@@ -208,6 +208,8 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
           return false;
         }
         var dateObj = new Date(date);
+        if (typeof date === 'string' && !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date))
+          return false;
         if (Object.prototype.toString.call(dateObj) !== '[object Date]')
           return false;
         return !isNaN(dateObj.getTime());
