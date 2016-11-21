@@ -3,9 +3,9 @@
         <div class="turn-calendar-input-container">
             <div class="turn-calendar-input">
                 <span ng-show="isNotSingleDateMode && !isDayClickDisabledMode" class="turn-calendar-from">From</span>
-                <input ng-show="!isDayClickDisabledMode" class="turn-calendar-input-box" type="text" ng-model="startDateString" ng-change="changeStartDate()" />
+                <input ng-show="!isDayClickDisabledMode" class="turn-calendar-input-box" type="text" ng-model="$parent.startDateString" ng-change="changeStartDate()" />
                 <span ng-show="isNotSingleDateMode && !isDayClickDisabledMode" class="turn-calendar-to">To</span>
-                <input ng-show="isNotSingleDateMode && !isDayClickDisabledMode" class="turn-calendar-input-box" type="text" ng-model="endDateString" ng-change="changeEndDate()" />
+                <input ng-show="isNotSingleDateMode && !isDayClickDisabledMode" class="turn-calendar-input-box" type="text" ng-model="$parent.endDateString" ng-change="changeEndDate()" />
                 <span ng-show="priorButtons.length && isNotSingleDateMode" 
                         class="turn-calendar-prior-label"
                         ng-class="{'no-left-margin': isDayClickDisabledMode}">
@@ -31,7 +31,7 @@
                 <table class="turn-calendar-table" ng-repeat="month in monthArray">
                     <thead>
                         <tr>
-                            <th colspan="{{DAYS_IN_WEEK}}" ng-click="selectMonth($index)" class="turn-calendar-month">{{monthNames[$index]}}</th>
+                            <th colspan="{{DAYS_IN_WEEK}}" ng-click="selectMonth($index)" class="turn-calendar-month">{{monthNames[$index]}}, {{monthYears[$index]}}</th>
                         </tr>
                         <tr>
                             <th ng-repeat="dayName in dayNames" class="turn-calendar-day">{{dayName}}</th>

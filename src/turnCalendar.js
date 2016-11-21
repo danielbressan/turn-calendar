@@ -481,6 +481,7 @@ angular
          * @type {array}
          */
         $scope.monthNames = MONTH_NAME = turnCalendarDefaults.monthName;
+        $scope.monthYears = [];
 
         /**
          * An array which contains the name of day of week, to be displayed
@@ -555,6 +556,7 @@ angular
 
                 monthArray.push(generateDayArray(year, newMonth));
                 $scope.monthNames.push(MONTH_NAME[newMonth]);
+                $scope.monthYears.push(year);
 
             }
 
@@ -606,6 +608,7 @@ angular
 
                 monthArray.unshift(generateDayArray(year, newMonth));
                 $scope.monthNames.unshift(MONTH_NAME[newMonth]);
+                $scope.monthYears.unshift(year);
             }
 
         };
@@ -640,6 +643,7 @@ angular
 
             // Reset the month names
             $scope.monthNames = [MONTH_NAME[month]];
+            $scope.monthYears = [year];
 
             setForwardMonths(monthArray, month, year);
 
@@ -1316,7 +1320,7 @@ angular
         var setStartEndDate = function () {
             if (angular.isDefined($attrs.startDate) && selectedStartDate) {
                 if (isNaN($scope.$parent.$eval($attrs.startDate))) {
-                    $scope.startDate = turnCalendarService.getDateString(selectedStartDate.date, self.timezone);
+                    $scope.startDateString = turnCalendarService.getDateString(selectedStartDate.date, self.timezone);
                 } else {
                     //$scope.startDate = selectedStartDate.date.getTime();
                     $scope.startDate = selectedStartDate.date;
@@ -1326,7 +1330,7 @@ angular
 
             if (angular.isDefined($attrs.endDate) && selectedEndDate) {
                 if (isNaN($scope.$parent.$eval($attrs.endDate))) {
-                    $scope.endDate = turnCalendarService.getDateString(selectedEndDate.date, self.timezone);
+                    $scope.endDateString = turnCalendarService.getDateString(selectedEndDate.date, self.timezone);
                 } else {
                     //$scope.endDate = selectedEndDate.date.getTime();
                     $scope.endDate = selectedEndDate.date;
@@ -1458,10 +1462,12 @@ angular
             if (allowedArraySize === $scope.monthArray.length) {
                 $scope.monthArray.shift();
                 $scope.monthNames.shift();
+                $scope.monthYears.shift();
             }
 
             $scope.monthArray.push(newMonthArray);
             $scope.monthNames.push(MONTH_NAME[newMonth]);
+            $scope.monthYears.push(year);
 
             discolorSelectedDateRange();
 
@@ -1518,10 +1524,12 @@ angular
             if (allowedArraySize === $scope.monthArray.length) {
                 $scope.monthArray.pop();
                 $scope.monthNames.pop();
+                $scope.monthYears.pop();
             }
 
             $scope.monthArray.unshift(newMonthArray);
             $scope.monthNames.unshift(MONTH_NAME[newMonth]);
+            $scope.monthYears.unshift(year);
 
             discolorSelectedDateRange();
 
@@ -1696,7 +1704,7 @@ angular
                 setSingleDate(day);
             }
 
-            $scope.endDate = turnCalendarService.getDateString(day.date, self.timezone);
+            $scope.endDateString = turnCalendarService.getDateString(day.date, self.timezone);
 
             if (selectedEndDate && selectedEndDate.date > day.date) {
                 colorSelectedDateRange();
@@ -1733,7 +1741,7 @@ angular
             }
 
             selectedEndDate = day;
-            $scope.endDate = turnCalendarService.getDateString(day.date, self.timezone);
+            $scope.endDateString = turnCalendarService.getDateString(day.date, self.timezone);
 
 
             discolorSelectedDateRange();
