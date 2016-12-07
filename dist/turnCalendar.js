@@ -1303,7 +1303,7 @@ angular.module('turn/calendar', ['calendarTemplates']).constant('turnCalendarDef
       if (!$scope.isNotSingleDateMode) {
         setSingleDate(day);
       }
-      $scope.endDateString = turnCalendarService.getDateString(day.date, self.timezone);
+      // $scope.endDateString = turnCalendarService.getDateString(day.date, self.timezone);
       if (selectedEndDate && selectedEndDate.date > day.date) {
         colorSelectedDateRange();
       }
